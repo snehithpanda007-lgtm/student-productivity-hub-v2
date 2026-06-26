@@ -1,0 +1,36 @@
+"use client";
+
+import { useState } from "react";
+
+interface Props {
+  onAdd: (title: string) => void;
+}
+
+export default function TaskForm({ onAdd }: Props) {
+  const [title, setTitle] = useState("");
+
+  const handleSubmit = () => {
+    if (!title.trim()) return;
+
+    onAdd(title);
+    setTitle("");
+  };
+
+  return (
+    <div className="flex gap-2 mb-6">
+      <input
+        className="border p-2 rounded flex-1 hover:bg-gray-900"
+        placeholder="New Task"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
+      <button
+        onClick={handleSubmit}
+        className="bg-blue-500 text-white px-4 rounded cursor-pointer hover:bg-blue-400"
+      >
+        Add
+      </button>
+    </div>
+  );
+}
